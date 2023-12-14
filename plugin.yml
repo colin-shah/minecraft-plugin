@@ -1,0 +1,8 @@
+name: PluginAutoTreeChopper
+version: 1.0
+main: com.minecraftdemo.PluginAutoTreeChopper
+api-version: 1.13
+commands:
+  createmachine:
+    usage: /createmachine
+    description: create machine

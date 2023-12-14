@@ -1,0 +1,17 @@
+# Define chopping speeds and particle effects for different materials
+chopping-speeds:
+  DIAMOND_BLOCK:
+    speed: 20
+    particle: CRIT
+  EMERALD_BLOCK:
+    speed: 40
+    particle: VILLAGER_HAPPY
+  GOLD_BLOCK:
+    speed: 60
+    particle: FLAME
+  AIR:
+    speed: 80
+    particle: VILLAGER_HAPPY
+
+# Define other configuration options if needed
+other-option: value
