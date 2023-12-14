@@ -33,9 +33,9 @@ This Minecraft Spigot plugin introduces an Auto Tree Chopper, a mechanized tree-
 ## Usage
 
 1. Build the machine following the setup instructions.
-2. Activate the machine by placing a chest on the bit block.
-3. The machine will automatically detect and chop down trees in its path.
-4. A notification will be sent when the chest is full, and the machine will deactivate.
+   - Here we have use command /createcommand (which you can find in plugin.yml)
+2. The machine will chop the whole tree
+3. A notification will be sent when the chest is full, and the machine will deactivate.
 
 ### Challenges or Issues
 1. Differentiate the chopping speed by material
