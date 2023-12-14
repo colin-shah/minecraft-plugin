@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Minecraft Spigot plugin introduces an Auto Tree Chopper, a mechanized tree-chopping machine with unique behaviors and interactions. The plugin allows players to construct a machine with different materials, each providing varying chopping speeds and bonus features.
+This Minecraft Spigot plugin introduces an Auto Tree Chopper, a mechanized tree-chopping machine with unique behaviours and interactions. The plugin allows players to construct a machine with different materials, each providing varying chopping speeds and bonus features.
 
 ## Setup
 
@@ -39,3 +39,4 @@ This Minecraft Spigot plugin introduces an Auto Tree Chopper, a mechanized tree-
 
 ### Challenges or Issues
 1. Differentiate the chopping speed by material
+2. As I was not used to this game, it was hard to find the Ferns/Mushrooms/Flowers
