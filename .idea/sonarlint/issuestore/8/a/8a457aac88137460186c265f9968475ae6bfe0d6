@@ -1,0 +1,21 @@
+
+Y
+java:S2629T"7Use the built-in formatting to construct this argument.(Á¶Çûÿÿÿÿÿ8ò»ƒ¦Í1
+S
+java:S2629W"7Use the built-in formatting to construct this argument.(‰ƒ]8Èİƒ¦Í1
+Y
+java:S2629\"7Use the built-in formatting to construct this argument.(ÏœÌÍûÿÿÿÿ8÷Ğ„¦Í1
+T
+java:S2629a"7Use the built-in formatting to construct this argument.(ƒ„ˆ·8¤°…¦Í1
+S
+java:S1172J"1Remove this unused method parameter "chestBlock".(„èçëúÿÿÿÿ8ÿ¾ì¥Í1
+J
+java:S1128"-Remove this unused import 'org.bukkit.World'.(“û–ş8ıÚ¹¡Í1
+]
+java:S1128";Remove this unused import 'org.bukkit.inventory.ItemStack'.(‰‚ö½ùÿÿÿÿ8ıÚ¹¡Í1
+R
+java:S1128"5Remove this unused import 'org.bukkit.material.Tree'.(—šâù8şÚ¹¡Í1
+N
+java:S1068"1Remove this unused "SEARCH_RADIUS" private field.(•õæÉ8ãÎ§íÌ1
+Q
+java:S1144›"3Remove this unused private "checkChestFull" method.(¤ŒëÚ8œè¡íÌ1
