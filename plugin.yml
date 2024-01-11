@@ -3,6 +3,6 @@ version: 1.0
 main: com.minecraftdemo.AutoTreeChopper
 api-version: 1.13
 commands:
-  gentree:
-    usage: /gentree
-    description: create tree
+  createmachine:
+    usage: /createmachine
+    description: create machine

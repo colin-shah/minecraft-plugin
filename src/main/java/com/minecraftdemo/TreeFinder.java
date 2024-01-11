@@ -10,9 +10,6 @@ public class TreeFinder {
 
     private static final int SEARCH_RADIUS = 30;
 
-    //===========
-
-
     public static Location findNearestTree(Location machineLocation) {
         World world = machineLocation.getWorld();
         Location nearestTree = null;

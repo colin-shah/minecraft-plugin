@@ -1,35 +1,18 @@
 package com.minecraftdemo;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.TreeType;
-import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Zombie;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
-import org.bukkit.event.player.PlayerEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Tree;
 
 import javax.sql.rowset.spi.SyncFactoryException;
 import java.util.HashMap;
 import java.util.UUID;
-
-import static javax.sql.rowset.spi.SyncFactory.getLogger;
 
 public class TreeChopperListener implements Listener {
     private static final int SEARCH_RADIUS = 30;
@@ -43,79 +26,28 @@ public class TreeChopperListener implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        generateTree(player.getLocation());
-    }
-
-    private void generateTree(Location location) {
-        // You can adjust the location, tree type, and other parameters as needed
-        World world = location.getWorld();
-        Location spawnLocation = world.getSpawnLocation();
-        Bukkit.getLogger().info("generate tree: " + spawnLocation);
-        location.getWorld().generateTree(spawnLocation, TreeType.TREE);
-    }
-
-    @EventHandler
-    public void onEntityDamage(EntityDamageByEntityEvent event) {
-        // Check if the damage is caused by a zombie
-        if (event.getDamager().getType() == EntityType.ZOMBIE) {
-            // Cancel the damage event
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
-    public void onZombieTarget(EntityTargetLivingEntityEvent event) {
-        // Check if the entity is a zombie
-        if (event.getEntity() instanceof Zombie) {
-            // Cancel the target event to prevent zombie attacks
-            event.setCancelled(true);
-        }
-    }
-
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (label.equalsIgnoreCase("gentree") && sender instanceof Player) {
-            Player player = (Player) sender;
-            Location location = player.getLocation();
-            World world = player.getWorld();
-
-            // Adjust the location if needed
-            location.setY(world.getHighestBlockYAt(location));
-
-            // Generate a tree
-            boolean treeGenerated = world.generateTree(location, TreeType.TREE);
-            if (treeGenerated) {
-                player.sendMessage("Tree generated!");
-            } else {
-                player.sendMessage("Failed to generate tree.");
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) throws SyncFactoryException {
         Block placedBlock = event.getBlockPlaced();
-        generateTree(placedBlock.getLocation());
+
+        //placedBlock.getLocation().getWorld().generateTree(placedBlock.getLocation(), TreeType.JUNGLE);
 
         //if (placedBlock.getType() == Material.CHEST) {
-        Block belowBlock = placedBlock.getLocation().subtract(0, 1, 0).getBlock();
-        //if (isMachineBase(belowBlock)) {
-        // Activate machine
-        MachineState machineState = new MachineState(placedBlock.getLocation(), belowBlock.getType());
-        UUID machineId = UUID.randomUUID(); // Unique identifier for each machine
-        machines.put(machineId, machineState);
+            Block belowBlock = placedBlock.getLocation().subtract(0, 1, 0).getBlock();
+            //if (isMachineBase(belowBlock)) {
+                // Activate machine
+                MachineState machineState = new MachineState(placedBlock.getLocation(), belowBlock.getType());
+                UUID machineId = UUID.randomUUID(); // Unique identifier for each machine
+                machines.put(machineId, machineState);
 
-        // Find nearest tree
-        Location treeLocation = TreeFinder.findNearestTree(placedBlock.getLocation());
-        plugin.getLogger().info("========== nearest tree  " + treeLocation);
+                // Find nearest tree
+                Location treeLocation = TreeFinder.findNearestTree(placedBlock.getLocation());
+                plugin.getLogger().info("========== nearest tree  " + treeLocation);
 
-        if (treeLocation != null && placedBlock.getWorld().getWorldBorder().isInside(treeLocation)) {
-            // Move machine towards the tree
-            BlockState blockState = placedBlock.getState();
-            if (blockState instanceof Chest) {
+                if (treeLocation != null && placedBlock.getWorld().getWorldBorder().isInside(treeLocation)) {
+                    plugin.getLogger().info("========== nearest tree inside the world");
+                    // Move machine towards the tree
+                    BlockState blockState = placedBlock.getState();
+                    if(blockState instanceof Chest){
                         /* Location nextStep = getNextStep(event.getPlayer().getLocation(), treeLocation);
 
                        Player player = event.getPlayer();
@@ -125,14 +57,16 @@ public class TreeChopperListener implements Listener {
                             player.teleport(nextStep); // Teleport the player to the next machine location
                         }*/
 
-                Inventory chestInventory = ((Chest) blockState).getInventory();
-                new MachineMover(plugin, placedBlock.getLocation(), treeLocation, belowBlock.getType(), chestInventory, machineId)
-                        .runTaskTimer(plugin, 20L, 20L); // Run every second
-            }
-        }
-        //}
+                        Inventory chestInventory = ((Chest) blockState).getInventory();
+                        new MachineMover(plugin, placedBlock.getLocation(), treeLocation, belowBlock.getType(), chestInventory, machineId)
+                                .runTaskTimer(plugin, 20L, 20L); // Run every second
+                    }
+                }
+            //}
         //}
     }
+
+
 
 
     public int getChoppingSpeed(Block baseBlock) {
@@ -181,6 +115,7 @@ public class TreeChopperListener implements Listener {
     private boolean isFull(Inventory inventory) {
         return inventory.firstEmpty() == -1;
     }
+
 
 
     private void checkChestFull(Inventory chestInventory) {

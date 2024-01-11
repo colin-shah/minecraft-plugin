@@ -1,14 +1,13 @@
 package com.minecraftdemo;
 
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
 
@@ -44,17 +43,7 @@ public class MachineMover extends BukkitRunnable {
             plugin.getLogger().info("When current location equals target tree location");
 
             // Start chopping tree with the determined speed
-            new TreeChopper(treeLocation, chestInventory, choppingSpeed, plugin).runTaskTimer(plugin, 0L, 20L * choppingSpeed);
-            return;
-        }
-
-        if (currentLocation.getBlock().getLocation().equals(treeLocation.getBlock().getLocation())) {
-            this.cancel(); // Stop the movement
-            // Determine chopping speed
-            int choppingSpeed = listener.getChoppingSpeed(currentLocation.getBlock().getRelative(BlockFace.DOWN));
-            plugin.getLogger().info("when current location equals target tree location");
-            // Start chopping tree with the determined speed
-            new TreeChopper(treeLocation, chestInventory, choppingSpeed, plugin).runTaskTimer(plugin, 0L, 20L * choppingSpeed);
+            new TreeChopper1(treeLocation, chestInventory, choppingSpeed, plugin).runTaskTimer(plugin, 0L, 20L * choppingSpeed);
             return;
         }
 
@@ -78,14 +67,14 @@ public class MachineMover extends BukkitRunnable {
 
             moveMachineTo(treeLocation, listener);
             // If there's an associated player, move the player too
-            plugin.getLogger().info(" player about start moving ");
+            /*plugin.getLogger().info(" player about start moving ");
 
             int choppingSpeed = listener.getChoppingSpeed(currentLocation.getBlock().getRelative(BlockFace.DOWN));
             plugin.getLogger().info(" start chopping after reaching the tree with speed of "+choppingSpeed);
             // Start chopping tree with the determined speed
             new TreeChopper(treeLocation, chestInventory, choppingSpeed, plugin).runTaskTimer(plugin, 0L, 20L * choppingSpeed);
 
-            plugin.getLogger().info("player Health " + player.getHealth());
+            plugin.getLogger().info("player Health " + player.getHealth());*/
         }
     }
 
